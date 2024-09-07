@@ -72,7 +72,7 @@ function Settings(hash, version, defCfg, callback, forceUpdate, reset) {
 	pubsub.on(`action:settings.set.${hash}`, (data) => {
 		try {
 			self.cfg._ = JSON.parse(data._);
-		} catch (err) {}
+		} catch (err) { }
 	});
 }
 
@@ -92,7 +92,7 @@ Settings.prototype.sync = function (callback) {
 			if (settings._) {
 				settings._ = JSON.parse(settings._);
 			}
-		} catch (_error) {}
+		} catch (_error) { }
 		_this.cfg = settings;
 		if (typeof _this.cfg._ !== 'object') {
 			_this.cfg._ = _this.defCfg;
@@ -139,19 +139,19 @@ Settings.prototype.get = function (key, def) {
 			obj = obj[part];
 		}
 	}
-	if (obj === undefined) {
-		if (def === undefined) {
-			def = this.defCfg;
-			for (let j = 0; j < parts.length; j += 1) {
-				part = parts[j];
-				if (part && def != null) {
-					def = def[part];
-				}
+	if (obj != undefined) {
+		return obj;
+	}
+	if (def === undefined) {
+		def = this.defCfg;
+		for (let j = 0; j < parts.length; j += 1) {
+			part = parts[j];
+			if (part && def != null) {
+				def = def[part];
 			}
 		}
-		return def;
 	}
-	return obj;
+	return def;
 };
 
 /**
