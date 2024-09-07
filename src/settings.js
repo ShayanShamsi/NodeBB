@@ -139,7 +139,7 @@ Settings.prototype.get = function (key, def) {
 			obj = obj[part];
 		}
 	}
-	if (obj != undefined) {
+	if (obj !== undefined) {
 		return obj;
 	}
 	if (def === undefined) {
